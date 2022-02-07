@@ -21,8 +21,20 @@ public class ParkingSpotController {
 	@Autowired
 	private ParkingSpotServiceImpl parkingSpotServiceImpl;
 	
+		
 	@PostMapping
-	public ResponseEntity<Void> saveParkingSpot(@RequestBody @Valid ParkingSpotDTO parkingSpotDTO){
+	public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDTO parkingSpotDTO){
+		
+		if (parkingSpotServiceImpl.existsByLicensePlateCar(parkingSpotDTO.getLicensePlateCar())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: License Plate Car is already in use");
+		}
+		if (parkingSpotServiceImpl.existsByParkingSpotNumber(parkingSpotDTO.getParkingSpotNumber())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot Number is already in use");
+		}
+		if (parkingSpotServiceImpl.existsByApartmentAndBlock(parkingSpotDTO.getApartment(), parkingSpotDTO.getBlock())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot already registered for this apartment/block!");
+		}
+		
 		ParkingSpot parkingSpot = parkingSpotServiceImpl.fromDTO(parkingSpotDTO);
 		parkingSpotServiceImpl.saveParkingSpot(parkingSpot);
 		return ResponseEntity.status(HttpStatus.CREATED).build();

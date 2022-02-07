@@ -1,8 +1,11 @@
 package com.lucasladeira.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
@@ -19,9 +22,11 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 	@Autowired
 	private ParkingSpotRepository parkingSpotRepository;
 	
+	
 	@Override
+	@Transactional
 	public ParkingSpot saveParkingSpot(ParkingSpot parkingSpot) {
-		parkingSpot.setRegistrationDate(LocalDateTime.now()); 
+		parkingSpot.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC"))); 
 		return parkingSpotRepository.save(parkingSpot);
 	}
 
@@ -41,6 +46,19 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 	public Optional<ParkingSpot> getByIdParkingSpot(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	public boolean existsByLicensePlateCar(String licenseCarPlate) {
+		return parkingSpotRepository.existsByLicensePlateCar(licenseCarPlate);
+	}
+	
+	public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
+		return parkingSpotRepository.existsByParkingSpotNumber(parkingSpotNumber);
+	}
+	
+	public boolean existsByApartmentAndBlock(String apartment, String block) {
+		return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
 	}
 
 	@Override
