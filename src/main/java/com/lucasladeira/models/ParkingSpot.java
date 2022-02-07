@@ -1,7 +1,7 @@
 package com.lucasladeira.models;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -20,7 +20,7 @@ public class ParkingSpot implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
 	@Column(unique = true)
@@ -46,7 +46,7 @@ public class ParkingSpot implements Serializable{
 	private String colorCar;
 	
 	@NotNull(message = "padronizar em message.properties")
-	private LocalTime registrationDate;
+	private LocalDateTime registrationDate;
 
 	@NotNull(message = "padronizar em message.properties")
 	@Length(max = 130, message = "padronizar em message.properties")
@@ -64,7 +64,7 @@ public class ParkingSpot implements Serializable{
 	public ParkingSpot() {}
 
 	public ParkingSpot(UUID id, String parkingSpotNumber, String licensePlateCar, String brandCar, 
-			String modelCar, String colorCar, LocalTime registrationDate, String responsibleName, String apartment,
+			String modelCar, String colorCar, LocalDateTime registrationDate, String responsibleName, String apartment,
 			String block) {
 		super();
 		this.id = id;
@@ -127,11 +127,11 @@ public class ParkingSpot implements Serializable{
 		this.colorCar = colorCar;
 	}
 
-	public LocalTime getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(LocalTime registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
