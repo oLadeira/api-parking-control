@@ -30,6 +30,21 @@ public class ParkingSpotDTO {
 	@NotBlank(message = "{campo.block.obrigatorio}")
 	private String block;
 
+	
+	
+	public ParkingSpotDTO(String parkingSpotNumber,String licensePlateCar,String brandCar, String modelCar, String colorCar,
+			String responsibleName, String apartment, String block) {
+		super();
+		this.parkingSpotNumber = parkingSpotNumber;
+		this.licensePlateCar = licensePlateCar;
+		this.brandCar = brandCar;
+		this.modelCar = modelCar;
+		this.colorCar = colorCar;
+		this.responsibleName = responsibleName;
+		this.apartment = apartment;
+		this.block = block;
+	}
+
 	public String getParkingSpotNumber() {
 		return parkingSpotNumber;
 	}
