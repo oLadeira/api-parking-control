@@ -24,39 +24,39 @@ public class ParkingSpot implements Serializable{
 	private UUID id;
 
 	@Column(unique = true)
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.parkingSpotNumber.obrigatorio}")
 	@Length(max = 10, message = "padronizar em message.properties")
 	private String parkingSpotNumber;
 	
 	@Column(unique = true)
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.licensePlateCar.obrigatorio}")
 	@Length(max = 7, message = "padronizar em message.properties")
 	private String licensePlateCar;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.brandCar.obrigatorio}")
 	@Length(max = 70, message = "padronizar em message.properties")
 	private String brandCar;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.modelCar.obrigatorio}")
 	@Length(max = 70, message = "padronizar em message.properties")
 	private String modelCar;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.colorCar.obrigatorio}")
 	@Length(max = 70, message = "padronizar em message.properties")
 	private String colorCar;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "Data de registro obrigatoria")
 	private LocalDateTime registrationDate;
 
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.responsibleName.obrigatorio}")
 	@Length(max = 130, message = "padronizar em message.properties")
 	private String responsibleName;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.apartment.obrigatorio}")
 	@Length(max = 30, message = "padronizar em message.properties")
 	private String apartment;
 	
-	@NotNull(message = "padronizar em message.properties")
+	@NotNull(message = "{campo.block.obrigatorio}")
 	@Length(max = 30, message = "padronizar em message.properties")
 	private String block;
 	

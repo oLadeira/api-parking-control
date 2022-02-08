@@ -5,29 +5,29 @@ import javax.validation.constraints.Size;
 
 public class ParkingSpotDTO {
 
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.parkingSpotNumber.obrigatorio}")
 	private String parkingSpotNumber;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.licensePlateCar.obrigatorio}")
 	@Size(max = 7)
 	private String licensePlateCar;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.brandCar.obrigatorio}")
 	private String brandCar;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.modelCar.obrigatorio}")
 	private String modelCar;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.colorCar.obrigatorio}")
 	private String colorCar;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.responsibleName.obrigatorio}")
 	private String responsibleName;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.apartment.obrigatorio}")
 	private String apartment;
 	
-	@NotBlank(message = "padronizar em message.properties")
+	@NotBlank(message = "{campo.block.obrigatorio}")
 	private String block;
 
 	public String getParkingSpotNumber() {
