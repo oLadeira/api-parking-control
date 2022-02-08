@@ -1,5 +1,6 @@
 package com.lucasladeira.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public interface ParkingSpotService {
 	ParkingSpot saveParkingSpot(ParkingSpot parkingSpot);
 	void deleteParkingSpot(ParkingSpot parkingSpot);
 	Page<ParkingSpot> getAllParkingSpots(Pageable pageable);
+	List<ParkingSpot> getAllParkingSpots();
 	Optional<ParkingSpot> getByIdParkingSpot(UUID id);
 	
 	ParkingSpot fromDTO(ParkingSpotDTO parkingSpotDTO);

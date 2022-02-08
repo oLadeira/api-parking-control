@@ -1,10 +1,16 @@
 package com.lucasladeira.controllers;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +46,20 @@ public class ParkingSpotController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<ParkingSpot>> getAllParkingSpots(){
+		List<ParkingSpot> parkingSpots = parkingSpotServiceImpl.getAllParkingSpots();
+		return ResponseEntity.ok().body(parkingSpots);
+	}
 	
-	
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getByIdParkingSpot(@PathVariable UUID id){
+		Optional<ParkingSpot> parkingSpot = parkingSpotServiceImpl.getByIdParkingSpot(id);
+		
+		if (parkingSpot.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found!");
+		}
+		
+		return ResponseEntity.ok().body(parkingSpot.get());
+	}
 }

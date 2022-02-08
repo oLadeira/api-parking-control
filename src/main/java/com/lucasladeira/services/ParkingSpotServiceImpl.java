@@ -2,6 +2,7 @@ package com.lucasladeira.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,11 +42,15 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<ParkingSpot> getAllParkingSpots() {
+		return parkingSpotRepository.findAll();
+	}
 
 	@Override
 	public Optional<ParkingSpot> getByIdParkingSpot(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		return parkingSpotRepository.findById(id);
 	}
 	
 	
@@ -74,5 +79,4 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 		parkingSpot.setBlock(parkingSpotDTO.getBlock());
 		return parkingSpot;
 	}
-
 }
