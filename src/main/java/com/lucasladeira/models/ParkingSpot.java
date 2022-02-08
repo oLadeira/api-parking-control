@@ -13,6 +13,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "TB_PARKING_SPOT")
@@ -45,6 +49,7 @@ public class ParkingSpot implements Serializable{
 	@Length(max = 70, message = "padronizar em message.properties")
 	private String colorCar;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	@NotNull(message = "Data de registro obrigatoria")
 	private LocalDateTime registrationDate;
 

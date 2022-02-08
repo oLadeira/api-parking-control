@@ -2,15 +2,14 @@ package com.lucasladeira.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.lucasladeira.dtos.ParkingSpotDTO;
@@ -32,14 +31,8 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 	}
 
 	@Override
-	public Page<ParkingSpot> getAllParkingSpots(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<ParkingSpot> getAllParkingSpots() {
-		return parkingSpotRepository.findAll();
+	public Page<ParkingSpot> getAllParkingSpots(Pageable pageable){
+		return parkingSpotRepository.findAll(pageable);
 	}
 
 	@Override
