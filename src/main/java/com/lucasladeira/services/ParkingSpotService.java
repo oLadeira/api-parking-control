@@ -15,6 +15,7 @@ public interface ParkingSpotService {
 
 	ParkingSpot saveParkingSpot(ParkingSpot parkingSpot);
 	void deleteParkingSpot(ParkingSpot parkingSpot);
+	void updateParkingSpot(UUID id, ParkingSpot parkingSpot);
 	Page<ParkingSpot> getAllParkingSpots(Pageable pageable);
 	List<ParkingSpot> getAllParkingSpots();
 	Optional<ParkingSpot> getByIdParkingSpot(UUID id);

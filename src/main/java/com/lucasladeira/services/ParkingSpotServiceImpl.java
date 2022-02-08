@@ -32,12 +32,6 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 	}
 
 	@Override
-	public void deleteParkingSpot(ParkingSpot parkingSpot) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Page<ParkingSpot> getAllParkingSpots(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
@@ -51,6 +45,24 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
 	@Override
 	public Optional<ParkingSpot> getByIdParkingSpot(UUID id) {
 		return parkingSpotRepository.findById(id);
+	}
+	
+	@Override
+	public void deleteParkingSpot(ParkingSpot parkingSpot) {
+		parkingSpotRepository.delete(parkingSpot);	
+	}
+	
+	@Override
+	public void updateParkingSpot(UUID id, ParkingSpot parkingSpot) {
+		Optional<ParkingSpot> optional = parkingSpotRepository.findById(id);
+		
+		if (optional.isEmpty()) {
+			//todo
+		}
+		
+		parkingSpot.setId(optional.get().getId());
+		parkingSpot.setRegistrationDate(optional.get().getRegistrationDate());
+		parkingSpotRepository.save(parkingSpot);
 	}
 	
 	
