@@ -13,7 +13,7 @@ import com.lucasladeira.models.ParkingSpot;
 public interface ParkingSpotService {
 
 	ParkingSpot saveParkingSpot(ParkingSpot parkingSpot);
-	void deleteParkingSpot(ParkingSpot parkingSpot);
+	void deleteParkingSpot(UUID id);
 	void updateParkingSpot(UUID id, ParkingSpot parkingSpot);
 	Page<ParkingSpot> getAllParkingSpots(Pageable pageable);
 	Optional<ParkingSpot> getByIdParkingSpot(UUID id);
