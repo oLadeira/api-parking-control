@@ -18,5 +18,7 @@ public interface ParkingSpotService {
 	Page<ParkingSpot> getAllParkingSpots(Pageable pageable);
 	Optional<ParkingSpot> getByIdParkingSpot(UUID id);
 	
+	void addResidentCarToParkingSpot(String parkingSpotNumber, String licenseCarPlate);
+
 	ParkingSpot fromDTO(ParkingSpotDTO parkingSpotDTO);
 }

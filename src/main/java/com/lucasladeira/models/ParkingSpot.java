@@ -1,7 +1,6 @@
 package com.lucasladeira.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -9,12 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lucasladeira.utils.ParkingSpotStatus;
 
 @Entity
 @Table(name = "TB_PARKING_SPOT")
@@ -30,58 +32,31 @@ public class ParkingSpot implements Serializable{
 	@Length(max = 10, message = "padronizar em message.properties")
 	private String parkingSpotNumber;
 	
-	@Column(unique = true)
-	@NotNull(message = "{campo.licensePlateCar.obrigatorio}")
-	@Length(max = 7, message = "padronizar em message.properties")
-	private String licensePlateCar;
-	
-	@NotNull(message = "{campo.brandCar.obrigatorio}")
-	@Length(max = 70, message = "padronizar em message.properties")
-	private String brandCar;
-	
-	@NotNull(message = "{campo.modelCar.obrigatorio}")
-	@Length(max = 70, message = "padronizar em message.properties")
-	private String modelCar;
-	
-	@NotNull(message = "{campo.colorCar.obrigatorio}")
-	@Length(max = 70, message = "padronizar em message.properties")
-	private String colorCar;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	@NotNull(message = "Data de registro obrigatoria")
-	private LocalDateTime registrationDate;
-
-	@NotNull(message = "{campo.responsibleName.obrigatorio}")
-	@Length(max = 130, message = "padronizar em message.properties")
-	private String responsibleName;
-	
-	@NotNull(message = "{campo.apartment.obrigatorio}")
-	@Length(max = 30, message = "padronizar em message.properties")
-	private String apartment;
 	
 	@NotNull(message = "{campo.block.obrigatorio}")
 	@Length(max = 30, message = "padronizar em message.properties")
 	private String block;
 	
+	private ParkingSpotStatus status;
+	
+//	@JoinColumn(name = "resident_id")
+//	private Resident resident;
+	
+	@OneToOne
+	@JoinColumn(name = "resident_car_id")
+	private ResidentCar residentCar;
+	
 	
 	public ParkingSpot() {}
 
-	public ParkingSpot(UUID id, String parkingSpotNumber, String licensePlateCar, String brandCar, 
-			String modelCar, String colorCar, LocalDateTime registrationDate, String responsibleName, String apartment,
-			String block) {
+	public ParkingSpot(UUID id, String parkingSpotNumber, String block) {
 		super();
 		this.id = id;
 		this.parkingSpotNumber = parkingSpotNumber;
-		this.licensePlateCar = licensePlateCar;
-		this.brandCar = brandCar;
-		this.modelCar = modelCar;
-		this.colorCar = colorCar;
-		this.registrationDate = registrationDate;
-		this.responsibleName = responsibleName;
-		this.apartment = apartment;
 		this.block = block;
 	}
 
+	
 	public UUID getId() {
 		return id;
 	}
@@ -98,62 +73,6 @@ public class ParkingSpot implements Serializable{
 		this.parkingSpotNumber = parkingSpotNumber;
 	}
 
-	public String getLicensePlateCar() {
-		return licensePlateCar;
-	}
-
-	public void setLicensePlateCar(String licensePlateCar) {
-		this.licensePlateCar = licensePlateCar;
-	}
-
-	public String getBrandCar() {
-		return brandCar;
-	}
-
-	public void setBrandCar(String brandCar) {
-		this.brandCar = brandCar;
-	}
-
-	public String getModelCar() {
-		return modelCar;
-	}
-
-	public void setModelCar(String modelCar) {
-		this.modelCar = modelCar;
-	}
-
-	public String getColorCar() {
-		return colorCar;
-	}
-
-	public void setColorCar(String colorCar) {
-		this.colorCar = colorCar;
-	}
-
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
-	public String getResponsibleName() {
-		return responsibleName;
-	}
-
-	public void setResponsibleName(String responsibleName) {
-		this.responsibleName = responsibleName;
-	}
-
-	public String getApartment() {
-		return apartment;
-	}
-
-	public void setApartment(String apartment) {
-		this.apartment = apartment;
-	}
-
 	public String getBlock() {
 		return block;
 	}
@@ -161,8 +80,29 @@ public class ParkingSpot implements Serializable{
 	public void setBlock(String block) {
 		this.block = block;
 	}
+
+	public ParkingSpotStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ParkingSpotStatus status) {
+		this.status = status;
+	}
+
+	public ResidentCar getResidentCar() {
+		return residentCar;
+	}
+
+	public void setResidentCar(ResidentCar residentCar) {
+		this.residentCar = residentCar;
+	}
+
 	
-	
-	
-	
+//	public Resident getResident() {
+//		return resident;
+//	}
+//
+//	public void setResident(Resident resident) {
+//		this.resident = resident;
+//	}
 }

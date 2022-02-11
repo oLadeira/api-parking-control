@@ -1,9 +1,5 @@
 package com.lucasladeira.controllers;
 
-import java.util.UUID;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,74 +7,43 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucasladeira.dtos.ParkingSpotDTO;
+import com.lucasladeira.dtos.ResidentToParkingSpotDTO;
 import com.lucasladeira.models.ParkingSpot;
 import com.lucasladeira.services.ParkingSpotServiceImpl;
 
 @RestController
-@RequestMapping("/api/parking-spot")
+@RequestMapping("api/parking-spot")
 public class ParkingSpotController {
 
 	@Autowired
 	private ParkingSpotServiceImpl parkingSpotServiceImpl;
 	
-		
+	
 	@PostMapping
-	public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDTO parkingSpotDTO){
-		
-//		if (parkingSpotServiceImpl.existsByLicensePlateCar(parkingSpotDTO.getLicensePlateCar())) {
-//			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: License Plate Car is already in use");
-//		}
-//		if (parkingSpotServiceImpl.existsByParkingSpotNumber(parkingSpotDTO.getParkingSpotNumber())) {
-//			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot Number is already in use");
-//		}
-//		if (parkingSpotServiceImpl.existsByApartmentAndBlock(parkingSpotDTO.getApartment(), parkingSpotDTO.getBlock())) {
-//			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot already registered for this apartment/block!");
-//		}
-		
-		ParkingSpot parkingSpot = parkingSpotServiceImpl.fromDTO(parkingSpotDTO);
-		parkingSpotServiceImpl.saveParkingSpot(parkingSpot);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<Object> saveParkingSpot(@RequestBody ParkingSpotDTO parkingSpotDTO){
+		parkingSpotServiceImpl.saveParkingSpot(parkingSpotServiceImpl.fromDTO(parkingSpotDTO));
+		return ResponseEntity.status(HttpStatus.CREATED).body("Vaga cadastrada com sucesso!");
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<ParkingSpot>> getAllParkingSpots
-	(
-			@PageableDefault(page = 0, size = 10, sort="id", direction = Sort.Direction.ASC) Pageable pageable
-	)
-	{
-		Page<ParkingSpot> parkingSpots = parkingSpotServiceImpl.getAllParkingSpots(pageable);
-		return ResponseEntity.ok().body(parkingSpots);
+	public ResponseEntity<Page<ParkingSpot>> getAllResidents(
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC ) Pageable pageable){
+		Page<ParkingSpot> parkingSpot = parkingSpotServiceImpl.getAllParkingSpots(pageable);
+		return ResponseEntity.status(HttpStatus.OK).body(parkingSpot);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Object> getByIdParkingSpot(@PathVariable UUID id){
-	
-		ParkingSpot parkingSpot = parkingSpotServiceImpl.getByIdParkingSpot(id).get();
-			
-		return ResponseEntity.ok().body(parkingSpot);
+	@PostMapping("add-resident-car")
+	public ResponseEntity<Object> addResidentCarToParkingSpot(@RequestBody ResidentToParkingSpotDTO residentToParkingSpotDTO){
+		parkingSpotServiceImpl.addResidentCarToParkingSpot(residentToParkingSpotDTO.getParkingSpotNumber(),
+															residentToParkingSpotDTO.getLicensePlateCar());
+		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteParkingSpot(@PathVariable UUID id){
-		
-		parkingSpotServiceImpl.deleteParkingSpot(id);
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Parking Spot deleted successfully!");
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateParkingSpot(@PathVariable UUID id, @RequestBody ParkingSpotDTO dto){
-		parkingSpotServiceImpl.updateParkingSpot(id, parkingSpotServiceImpl.fromDTO(dto));
-		return ResponseEntity.status(HttpStatus.OK).body("Parking Spot updated successfully!");
-	}
 }
