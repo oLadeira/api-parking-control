@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,10 @@ public class ResidentCar implements Serializable{
 	private UUID id;
 	
 	private String responsibleName;
+	
+	@Column(unique = true)
 	private String licensePlateCar;
+	
 	private String brandCar;
 	private String modelCar;
 	private String colorCar;

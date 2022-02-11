@@ -9,5 +9,5 @@ import com.lucasladeira.models.ResidentCar;
 public interface ResidentCarRepository extends JpaRepository<ResidentCar, UUID>{
 
 	ResidentCar findByLicensePlateCar(String licensePlateCar);
-	
+	boolean existsById(UUID id);
 }

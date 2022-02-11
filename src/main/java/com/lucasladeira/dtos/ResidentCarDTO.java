@@ -2,12 +2,28 @@ package com.lucasladeira.dtos;
 
 import java.util.UUID;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class ResidentCarDTO {
 
 	private String responsibleName;
+	
+	@NotEmpty(message = "{campo.licensePlateCar.obrigatorio}")
+	@Length(max = 6, message = "{campo.licensePlateCar.tamanhoMaximo}")
 	private String licensePlateCar;
+	
+	@NotEmpty(message = "{campo.brandCar.obrigatorio}")
+	@Length(max = 50, message = "{campo.brandCar.tamanhoMaximo}")
 	private String brandCar;
+	
+	@NotEmpty(message = "{campo.modelCar.obrigatorio}")
+	@Length(max = 255, message = "{campo.modelCar.tamanhoMaximo}")
 	private String modelCar;
+	
+	@NotEmpty(message = "{campo.colorCar.obrigatorio}")
+	@Length(max = 20, message = "{campo.colorCar.tamanhoMaximo}")
 	private String colorCar;
 	
 	private UUID idResident;

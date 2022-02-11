@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.lucasladeira.dtos.ResidentCarDTO;
+import com.lucasladeira.dtos.UpdateResidentCarDTO;
 import com.lucasladeira.models.ResidentCar;
 
 public interface ResidentCarService {
@@ -18,4 +19,5 @@ public interface ResidentCarService {
 	Optional<ResidentCar> getByIdResidentCar(UUID id);
 	
 	ResidentCar fromDTO (ResidentCarDTO residentCarDTO);
+	ResidentCar fromDTO (UpdateResidentCarDTO updateResidentCarDTO);
 }

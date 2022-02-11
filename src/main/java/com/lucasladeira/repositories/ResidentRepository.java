@@ -8,6 +8,5 @@ import com.lucasladeira.models.Resident;
 
 public interface ResidentRepository extends JpaRepository<Resident, UUID>{
 	
-	
-	
+	boolean existsById(UUID id);
 }
