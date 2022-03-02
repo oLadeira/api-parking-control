@@ -1,22 +1,22 @@
 package com.lucasladeira.dtos;
 
-import java.util.UUID;
-
 import javax.validation.constraints.NotBlank;
 
-import com.lucasladeira.utils.ParkingSpotStatus;
+import org.hibernate.validator.constraints.Length;
 
 public class ParkingSpotDTO {
 
 	@NotBlank(message = "{campo.parkingSpotNumber.obrigatorio}")
+	@Length(max = 4, message = "{campo.parkingSpotNumber.tamanhoMaximo}")
 	private String parkingSpotNumber;
 		
 	@NotBlank(message = "{campo.block.obrigatorio}")
+	@Length(max = 2, message = "{campo.block.tamanhoMaximo}")
 	private String block;
 
-	private ParkingSpotStatus status;
+	//private ParkingSpotStatus status;
 	
-	private UUID residentCar;
+//	private UUID residentCar; 
 	
 	public ParkingSpotDTO(String parkingSpotNumber, String block) {
 		super();
@@ -40,19 +40,19 @@ public class ParkingSpotDTO {
 		this.block = block;
 	}
 
-	public ParkingSpotStatus getStatus() {
-		return status;
-	}
+//	public ParkingSpotStatus getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(ParkingSpotStatus status) {
+//		this.status = status;
+//	}
 
-	public void setStatus(ParkingSpotStatus status) {
-		this.status = status;
-	}
-
-	public UUID getResidentCar() {
-		return residentCar;
-	}
-
-	public void setResidentCar(UUID residentCar) {
-		this.residentCar = residentCar;
-	}	
+//	public UUID getResidentCar() {
+//		return residentCar;
+//	}
+//
+//	public void setResidentCar(UUID residentCar) {
+//		this.residentCar = residentCar;
+//	}	
 }

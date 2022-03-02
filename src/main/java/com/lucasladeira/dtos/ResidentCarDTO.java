@@ -11,7 +11,7 @@ public class ResidentCarDTO {
 	private String responsibleName;
 	
 	@NotEmpty(message = "{campo.licensePlateCar.obrigatorio}")
-	@Length(max = 6, message = "{campo.licensePlateCar.tamanhoMaximo}")
+	@Length(max = 7, message = "{campo.licensePlateCar.tamanhoMaximo}")
 	private String licensePlateCar;
 	
 	@NotEmpty(message = "{campo.brandCar.obrigatorio}")

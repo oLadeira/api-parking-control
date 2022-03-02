@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.lucasladeira.dtos.ResidentCarDTO;
+import com.lucasladeira.dtos.SaveResidentCarDTO;
 import com.lucasladeira.dtos.UpdateResidentCarDTO;
 import com.lucasladeira.models.Resident;
 import com.lucasladeira.models.ResidentCar;
@@ -61,7 +61,7 @@ public class ResidentCarServiceImpl implements ResidentCarService{
 	@Override
 	public void deleteResidentCar(UUID id) {
 		
-		if (residentCarRepository.existsById(id)) {
+		if (!residentCarRepository.existsById(id)) {
 			throw new ObjectNotFoundException(
 					messageSource.getMessage("objeto.residentCar.naoEncontrado", null, Locale.getDefault()));
 		}
@@ -86,19 +86,19 @@ public class ResidentCarServiceImpl implements ResidentCarService{
 
 	
 	@Override
-	public ResidentCar fromDTO(ResidentCarDTO residentCarDTO) {
+	public ResidentCar fromDTO(SaveResidentCarDTO saveResidentCarDTO) {
 		
-		Optional<Resident> resident = residentRepository.findById(residentCarDTO.getIdResident());
+		Optional<Resident> resident = residentRepository.findByCpf(saveResidentCarDTO.getResidentCPF());
 		resident.orElseThrow(() -> new ObjectNotFoundException(
 				messageSource.getMessage("objeto.resident.naoEncontrado", null, Locale.getDefault())));
 	
 //		ParkingSpot parkingSpot = parkingSpotRepository.findById(residentCarDTO.getIdParkingSpot()).get();
 		ResidentCar residentCar = new ResidentCar(null,
-				residentCarDTO.getResponsibleName(),
-				residentCarDTO.getLicensePlateCar(),
-				residentCarDTO.getBrandCar(),
-				residentCarDTO.getModelCar(),
-				residentCarDTO.getColorCar(),
+				saveResidentCarDTO.getResponsibleName(),
+				saveResidentCarDTO.getLicensePlateCar(),
+				saveResidentCarDTO.getBrandCar(),
+				saveResidentCarDTO.getModelCar(),
+				saveResidentCarDTO.getColorCar(),
 				resident.get());
 		return residentCar;
 	}

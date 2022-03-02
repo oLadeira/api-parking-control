@@ -1,15 +1,15 @@
 package com.lucasladeira.dtos;
 
-public class ResidentToParkingSpotDTO {
+public class ResidentCarToParkingSpotDTO {
 
 	private String parkingSpotNumber;
 	private String licensePlateCar;
 	
 	
-	public ResidentToParkingSpotDTO() {}
+	public ResidentCarToParkingSpotDTO() {}
 
 
-	public ResidentToParkingSpotDTO(String parkingSpotNumber, String licensePlateCar) {
+	public ResidentCarToParkingSpotDTO(String parkingSpotNumber, String licensePlateCar) {
 		super();
 		this.parkingSpotNumber = parkingSpotNumber;
 		this.licensePlateCar = licensePlateCar;

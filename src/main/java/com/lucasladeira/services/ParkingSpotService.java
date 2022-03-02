@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.lucasladeira.dtos.ParkingSpotDTO;
+import com.lucasladeira.dtos.ResidentCarToParkingSpotDTO;
 import com.lucasladeira.models.ParkingSpot;
 
 
@@ -18,7 +19,10 @@ public interface ParkingSpotService {
 	Page<ParkingSpot> getAllParkingSpots(Pageable pageable);
 	Optional<ParkingSpot> getByIdParkingSpot(UUID id);
 	
+	
+	
 	void addResidentCarToParkingSpot(String parkingSpotNumber, String licenseCarPlate);
-
+	void removeResidentCarFromParkingSpot(ResidentCarToParkingSpotDTO residentCarToParkingSpotDTO);
+	
 	ParkingSpot fromDTO(ParkingSpotDTO parkingSpotDTO);
 }
